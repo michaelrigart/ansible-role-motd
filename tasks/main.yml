@@ -1,0 +1,26 @@
+---
+
+- name: copy additional files for motd
+  copy:
+    src: '{{ item }}'
+    dest: '{{ motd_path }}'
+    owner: root
+    group: root
+    mode: 0755
+  with_items:
+    motd_additional_files
+  register: additional_files
+  when: motd_additional_files is defined
+
+- name: remove files from motd
+  file:
+    path: '{{ motd_path }}/{{ item }}'
+    state: absent
+  with_items:
+    motd_remove_files
+  register: removed_files
+  when: motd_remove_files is defined
+
+- name: generate motd
+  command: 'run-parts {{ motd_path }}'
+  when: additional_files|changed or removed_files|changed
