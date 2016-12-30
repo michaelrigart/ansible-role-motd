@@ -1,6 +1,5 @@
 Ansible motd Role
 ==================
-[![Build Status](https://semaphoreci.com/api/v1/projects/a1942bbc-a453-4574-b692-d028f246b819/459471/badge.svg)](https://semaphoreci.com/michaelrigart/ansible-role-motd)
 
 An ansible role for configuring motd.
 
@@ -18,7 +17,7 @@ Example Playbook
 ```yaml
 - hosts: servers
   roles:
-     - { role: MichaelRigart.motd, sudo: Yes }
+     - { role: MichaelRigart.motd, become: true }
 ```
 
 License
